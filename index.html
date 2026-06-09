@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAYA JAYA VARAHI TOYS, RETURN GIFTS & KITCHEN WARE | Premium Retail Shop Peerzadiguda</title>
+  <meta name="description" content="Discover premium toys, return gift packs, and stainless steel kitchenware at Jaya Jaya Varahi Toys. Peerzadiguda, Hyderabad. Pre-order online today!">
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Splash Screen Entrance -->
+  <div id="splash-screen">
+    <div class="splash-panel left">
+      <img src="./splash.jpg" alt="Left Door Panel">
+    </div>
+    <div class="splash-panel right">
+      <img src="./splash.jpg" alt="Right Door Panel">
+    </div>
+    
+    <!-- Central Explore Overlay -->
+    <div id="explore-overlay-btn-container">
+      <button class="glass-btn gold floating-element" id="explore-store-btn" style="font-size: 1.35rem; padding: 18px 45px; border-width: 2px; border-radius: 14px; box-shadow: 0 0 25px rgba(255, 107, 0, 0.35); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;">
+        <i class="fa-solid fa-door-open"></i> EXPLORE STORE
+      </button>
+    </div>
+
+    <!-- Camera Flash Overlay -->
+    <div id="camera-flash"></div>
+  </div>
+
+  <!-- Live Glowing Blobs Wallpaper -->
+  <div class="wallpaper-blobs-container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Printable Flyer View (Shown during print mode only) -->
+  <div id="print-page-view">
+    <div class="print-card">
+      <div class="print-logo">JAYA JAYA VARAHI TOYS</div>
+      <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px; color:#ff6b00; letter-spacing:1px;">
+        RETURN GIFTS & KITCHEN WARE
+      </div>
+      <p style="font-size: 1.1rem; font-style: italic; margin-bottom: 25px;">Scan to browse our interactive 3D store & Pre-order products online!</p>
+      
+      <!-- Generated SVG QR code goes here -->
+      <div class="print-qr-code" id="print-qr-container"></div>
+      
+      <div class="print-info">
+        <p><strong><i class="fa-solid fa-location-dot"></i> Location:</strong> <a href="https://www.google.com/maps/place/Jaya+Jaya+Varahi+Gifts-Boduppal/@17.4133882,78.5945296,16z/data=!3m1!4b1!4m6!3m5!1s0x3bcb9f0037de2275:0x20f4ee54d5b56648!8m2!3d17.4133882!4d78.5971045!16s%2Fg%2F11yq2jljg4" target="_blank" style="text-decoration: none; color: inherit; cursor: pointer;">Kamala Nagar Colony, Peerzadiguda, Hyderabad <i class="fa-solid fa-up-right-from-square" style="color:var(--accent-gold); font-size:0.75rem; margin-left:3px;"></i></a></p>
+        <p><strong><i class="fa-solid fa-phone"></i> Contact:</strong> +91 75693 04410 (WhatsApp Pre-order available)</p>
+        <p><strong><i class="fa-solid fa-clock"></i> Timings:</strong> 10:00 AM to 9:00 PM (Monday to Sunday)</p>
+      </div>
+      <div style="margin-top: 40px; border-top: 1px solid #ddd; padding-top: 20px; font-size: 0.85rem; color: #777;">
+        Thank you for visiting! Scan and get 10% off on your first order.
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Nav -->
+  <header>
+    <a href="#" class="logo">
+      <img src="./logo.png" onerror="this.src='https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200'" alt="Varahi Store Brand">
+      <div>
+        <span style="color:var(--accent-gold)">VARAHI</span>
+        <span style="font-size:0.75rem; display:block; color:var(--text-muted); font-family:var(--font-primary)">TOYS & KITCHENWARE</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#catalog">Catalog</a></li>
+      <li><a href="#loyalty">Loyalty Cards</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#admin" id="admin-nav-link">Admin Dashboard</a></li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:20px;">
+      <button class="cart-icon-btn" id="cart-toggle-btn">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge" id="cart-badge-count">0</span>
+      </button>
+      <button class="glass-btn gold" id="print-flyer-btn" style="padding: 8px 16px; font-size: 0.85rem;">
+        <i class="fa-solid fa-print"></i> Get QR Flyer
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Jaya Jaya Varahi Toys, Return Gifts & Kitchen Ware</h1>
+      <p class="hero-subtitle">
+        Your neighborhood premium store in Peerzadiguda, Hyderabad. Explore our handpicked ranges of premium Toys, exquisite Return Gift Packs (Set of 10), and durable Stainless Steel Kitchenware Sets. Pre-order online for instant pickup!
+      </p>
+      <div style="display:flex; gap:15px; flex-wrap:wrap;">
+        <a href="#catalog" class="glass-btn"><i class="fa-solid fa-magnifying-glass"></i> Browse Catalog</a>
+        <a href="#loyalty" class="glass-btn gold"><i class="fa-solid fa-gift"></i> Check Loyalty Stamps</a>
+      </div>
+    </div>
+    
+    <div class="hero-3d-container glass-panel">
+      <!-- Three.js Canvas -->
+      <canvas id="canvas3d"></canvas>
+      <div class="showroom-hint">
+        <i class="fa-solid fa-rotate" style="color:var(--accent-gold); animation: spin 4s linear infinite;"></i>
+        <span>3D Store Shelf: Drag to rotate, click items to view details</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Today's Special Card -->
+  <section class="special-section" id="specials">
+    <div class="glass-panel special-card" id="special-card-container">
+      <div class="special-badge"><i class="fa-solid fa-fire"></i> TODAY'S SPECIAL OFFER</div>
+      <div class="special-image">
+        <img id="special-offer-img" src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600" alt="Today's Special product">
+      </div>
+      <div class="special-details">
+        <h3 id="special-offer-title">Premium Cookware Combo</h3>
+        <p id="special-offer-desc">Super heavy stainless steel 3-piece pot set with glass lids. Highly durable, perfect for induction and gas stoves alike.</p>
+        <div class="special-price-container">
+          <span class="old-price" id="special-offer-oldprice">₹2,499</span>
+          <span class="new-price" id="special-offer-newprice">₹1,799</span>
+        </div>
+        <button class="glass-btn" id="add-special-to-cart"><i class="fa-solid fa-cart-plus"></i> Claim This Special Offer</button>
+      </div>
+      <!-- Edit Pencil for admin shortcut -->
+      <button class="admin-special-trigger" id="admin-special-edit-btn" title="Edit Offer (Admin)">
+        <i class="fa-solid fa-pencil"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Interactive Catalog -->
+  <section class="catalog-section" id="catalog">
+    <div class="section-header">
+      <h2>Interactive Shop Catalog</h2>
+      <p>Search and filter high-quality products. Pre-order for store pickup.</p>
+    </div>
+    
+    <div class="catalog-filters">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search-input" placeholder="Search toys, kitchenware...">
+      </div>
+      <div class="filter-tabs">
+        <div class="filter-tab active" data-category="all">All Items</div>
+        <div class="filter-tab" data-category="toys">Premium Toys</div>
+        <div class="filter-tab" data-category="gifts">Return Gifts</div>
+        <div class="filter-tab" data-category="kitchen">Kitchen Utilities</div>
+      </div>
+      <div class="sort-box">
+        <select id="sort-select" style="padding: 10px 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); border-radius: 10px; color: var(--text-white); outline: none; font-family: var(--font-primary); cursor: pointer; transition: all 0.3s;">
+          <option value="default">Sort by: Default</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="product-grid-container">
+      <!-- Rendered dynamically via JS -->
+    </div>
+  </section>
+
+  <!-- Loyalty stamp visual card -->
+  <section class="loyalty-section" id="loyalty">
+    <div class="section-header">
+      <h2>Varahi Rewards Program</h2>
+      <p>Every 10th purchase gives you a free gift! Check your current points card below.</p>
+    </div>
+
+    <div class="glass-panel loyalty-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+        <span style="font-weight:700; font-family:var(--font-heading); color:var(--accent-gold);"><i class="fa-solid fa-id-card"></i> LOYALTY CARD</span>
+        <span style="font-size:0.8rem; background:rgba(255,255,255,0.08); padding:4px 10px; border-radius:10px;" id="loyalty-member-id">ID: Guest User</span>
+      </div>
+      
+      <!-- Visual Stamp Slots -->
+      <div class="loyalty-stamp-grid" id="stamp-grid-container">
+        <!-- 10 Slots dynamically generated -->
+      </div>
+      
+      <p id="loyalty-points-summary" style="font-size:0.95rem; text-align:center; color:var(--text-muted); margin-bottom:25px;">
+        Enter your phone number to check stamps and receive birthday rewards!
+      </p>
+
+      <div class="loyalty-auth-container">
+        <input type="tel" id="loyalty-phone-input" placeholder="Enter phone (e.g. 9876543210)" style="flex-grow:1; padding:12px; border:1px solid var(--border-glass); border-radius:10px; background:rgba(0,0,0,0.2); color:white; outline:none;">
+        <button class="glass-btn gold" id="loyalty-check-btn" style="padding:12px 20px;">Access Card</button>
+      </div>
+
+      <!-- Add Stamp simulator (for testing / mockup purposes) -->
+      <div style="margin-top:20px; text-align:center;" id="mock-stamp-increment-container">
+        <button class="glass-btn" id="simulate-purchase-stamp-btn" style="padding:8px 16px; font-size:0.8rem; background:rgba(255,107,0,0.1); border-color:rgba(255,107,0,0.3);">
+          <i class="fa-solid fa-stamp"></i> Simulate Purchase Stamp
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Customer Reviews Testimonial Slider -->
+  <section class="reviews-section" id="testimonials">
+    <div class="section-header">
+      <h2>Happy Local Customers</h2>
+      <p>Rated 4.8/5 Stars based on 150+ reviews on Google Maps.</p>
+    </div>
+    
+    <div class="reviews-container glass-panel">
+      <button class="review-nav-btn prev" id="review-prev"><i class="fa-solid fa-chevron-left"></i></button>
+      
+      <div class="reviews-track" id="reviews-slider-track">
+        <div class="review-slide">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"Outstanding collection of toys! Very reasonably priced set of 10 return gift boxes that saved me a lot of hassle for my kid's birthday. Staff was super polite."</p>
+          <div class="review-author">- Ramesh Kumar, Kamala Nagar</div>
+        </div>
+        <div class="review-slide">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+          </div>
+          <p class="review-text">"Perfect local kitchenware shop in Peerzadiguda. They have heavy base steel utensils which last forever. Checked out online catalog and pre-ordered, pickup took only 2 minutes."</p>
+          <div class="review-author">- Sravanthi G., Homemaker</div>
+        </div>
+        <div class="review-slide">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"If you need bulk return gifts at Peerzadiguda, this is the place. Very friendly pricing and custom packing options. High recommendation."</p>
+          <div class="review-author">- Anitha Reddy, Peerzadiguda</div>
+        </div>
+      </div>
+
+      <button class="review-nav-btn next" id="review-next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </section>
+
+  <!-- Location Map & Hours Contact Section -->
+  <section class="contact-section" id="contact">
+    <div class="section-header">
+      <h2>Visit or Reach Us</h2>
+      <p>We are open every day from 10:00 AM to 9:00 PM.</p>
+    </div>
+    
+    <div class="contact-wrapper">
+      <div class="map-container glass-panel">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.1352824647313!2d78.5945296!3d17.4133882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9f0037de2275%3A0x20f4ee54d5b56648!2sJaya%20Jaya%20Varahi%20Gifts-Boduppal!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      
+      <div class="info-panel glass-panel">
+        <div>
+          <a href="https://www.google.com/maps/place/Jaya+Jaya+Varahi+Gifts-Boduppal/@17.4133882,78.5945296,16z/data=!3m1!4b1!4m6!3m5!1s0x3bcb9f0037de2275:0x20f4ee54d5b56648!8m2!3d17.4133882!4d78.5971045!16s%2Fg%2F11yq2jljg4" target="_blank" class="info-item" style="text-decoration: none; color: inherit; display: flex; cursor: pointer;">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <div>
+              <h4>Address Location</h4>
+              <p style="transition: color 0.3s;" onmouseover="this.style.color='#ffd700'" onmouseout="this.style.color=''">P&T Colony, Kamala Nagar Colony, Peerzadiguda, Hyderabad, Telangana 500098 <i class="fa-solid fa-up-right-from-square" style="color:var(--accent-gold); font-size:0.75rem; margin-left:3px;"></i></p>
+            </div>
+          </a>
+          <div class="info-item">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <h4>Store Timings</h4>
+              <p>Monday - Sunday: 10:00 AM – 9:00 PM</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-square-phone"></i>
+            <div>
+              <h4>WhatsApp Pre-orders</h4>
+              <p>+91 75693 04410</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Feedback form -->
+        <div>
+          <h4 style="margin-bottom:10px; border-top:1px solid rgba(255,255,255,0.08); padding-top:20px;">Send Us Feedback</h4>
+          <form class="feedback-form" id="customer-feedback-form">
+            <div class="form-group">
+              <label>Your Rating:</label>
+              <div class="rating-selection" id="feedback-stars-container">
+                <i class="fa-solid fa-star active" data-rating="1"></i>
+                <i class="fa-solid fa-star active" data-rating="2"></i>
+                <i class="fa-solid fa-star active" data-rating="3"></i>
+                <i class="fa-solid fa-star active" data-rating="4"></i>
+                <i class="fa-solid fa-star active" data-rating="5"></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" id="feedback-name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <textarea id="feedback-message" rows="3" placeholder="Suggestions or comments..." required></textarea>
+            </div>
+            <button type="submit" class="glass-btn gold"><i class="fa-brands fa-whatsapp"></i> Submit Feedback via WhatsApp</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admin Panel Dashboard Area -->
+  <section class="admin-section" id="admin" style="display:none;">
+    <div class="section-header">
+      <h2>Owner Administration Portal</h2>
+      <p>Manage product inventories, greeting campaigns, and leads tracker.</p>
+    </div>
+    
+    <div class="admin-grid glass-panel">
+      <div class="admin-sidebar" style="border-right:1px solid rgba(255, 107, 0, 0.15)">
+        <div class="admin-nav-item active" data-pane="add-product"><i class="fa-solid fa-plus-circle"></i> Add New Product</div>
+        <div class="admin-nav-item" data-pane="special-offer"><i class="fa-solid fa-tags"></i> Edit Today's Special</div>
+        <div class="admin-nav-item" data-pane="whatsapp-greetings"><i class="fa-brands fa-whatsapp"></i> WhatsApp Campaign</div>
+        <div class="admin-nav-item" data-pane="manage-products"><i class="fa-solid fa-trash-can"></i> Remove Stock</div>
+        <div class="admin-nav-item" data-pane="leads-list"><i class="fa-solid fa-users"></i> Collected Leads (<span id="leads-count">0</span>)</div>
+        <button class="glass-btn" id="admin-logout-btn" style="width:100%; margin-top:30px; background:rgba(255,0,0,0.1); border-color:red;"><i class="fa-solid fa-sign-out-alt"></i> Logout Dashboard</button>
+      </div>
+
+      <div class="admin-content">
+        <!-- Pane: Add Product -->
+        <div class="admin-pane active" id="pane-add-product">
+          <h3 style="margin-bottom:20px; color:var(--accent-gold);">Add New Catalog Product</h3>
+          <form id="admin-add-product-form">
+            <div class="form-group" style="margin-bottom:15px;">
+              <label>Product Name</label>
+              <input type="text" id="admin-prod-name" placeholder="e.g. Premium Toy Car" required>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:15px;">
+              <div class="form-group">
+                <label>Category</label>
+                <select id="admin-prod-cat" required>
+                  <option value="toys">Premium Toys</option>
+                  <option value="gifts">Return Gifts</option>
+                  <option value="kitchen">Kitchen Utilities</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Price (₹)</label>
+                <input type="number" id="admin-prod-price" placeholder="MRP Price" required>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:20px;">
+              <label>Upload Product Image File</label>
+              <input type="file" id="admin-prod-img-file" accept="image/*" required>
+            </div>
+            <button type="submit" class="glass-btn"><i class="fa-solid fa-check"></i> Insert Product to Live Catalog</button>
+          </form>
+        </div>
+
+        <!-- Pane: Edit Special Offer -->
+        <div class="admin-pane" id="pane-special-offer">
+          <h3 style="margin-bottom:20px; color:var(--accent-gold);">Edit Today's Special Offer Card</h3>
+          <form id="admin-edit-special-form">
+            <div class="form-group" style="margin-bottom:15px;">
+              <label>Offer Name</label>
+              <input type="text" id="admin-special-title" required>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+              <label>Offer Details</label>
+              <textarea id="admin-special-desc" rows="3" required></textarea>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:15px;">
+              <div class="form-group">
+                <label>Old Price (₹)</label>
+                <input type="text" id="admin-special-oldprice" required>
+              </div>
+              <div class="form-group">
+                <label>New Price (₹)</label>
+                <input type="text" id="admin-special-newprice" required>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:20px;">
+              <label>Product Image Link</label>
+              <input type="text" id="admin-special-img" required>
+            </div>
+            <div class="form-group" style="margin-bottom:20px; flex-direction:row; align-items:center; gap:10px;">
+              <input type="checkbox" id="admin-special-enabled" style="width:20px; height:20px; cursor:pointer;">
+              <label for="admin-special-enabled" style="cursor:pointer; font-weight:600; color:var(--accent-gold);">Show Special Offer Card on Homepage</label>
+            </div>
+            <button type="submit" class="glass-btn"><i class="fa-solid fa-save"></i> Save Updates</button>
+          </form>
+        </div>
+
+        <!-- Pane: WhatsApp greetings -->
+        <div class="admin-pane" id="pane-whatsapp-greetings">
+          <h3 style="margin-bottom:20px; color:var(--accent-gold);">WhatsApp Greeting Message Generator</h3>
+          <p style="color:var(--text-muted); margin-bottom:20px; font-size:0.9rem;">
+            Select a festive holiday template and generate custom WhatsApp messages with discount links to text to your customer base.
+          </p>
+          <div class="form-group" style="margin-bottom:20px;">
+            <label>Select Festival</label>
+            <select id="admin-festival-select">
+              <option value="Diwali">Diwali (Festival of Lights)</option>
+              <option value="Ugadi">Ugadi (Telugu New Year)</option>
+              <option value="Dussehra">Dussehra / Vijayadashami</option>
+              <option value="Sankranti">Makar Sankranti (Harvest Festival)</option>
+              <option value="Birthday">Special Customer Birthday Greeting</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:20px;">
+            <label>Preview Message Template</label>
+            <textarea id="admin-festival-preview" rows="5" readonly style="background:rgba(0,0,0,0.3); color:var(--text-muted); border-style:dashed;"></textarea>
+          </div>
+          <button class="glass-btn gold" id="admin-send-bulk-greetings-btn"><i class="fa-brands fa-whatsapp"></i> Text Selected Customer Leads via WhatsApp</button>
+        </div>
+
+        <!-- Pane: Leads collection list -->
+        <div class="admin-pane" id="pane-leads-list">
+          <h3 style="margin-bottom:20px; color:var(--accent-gold);">Collected Lead Contacts</h3>
+          <div style="max-height: 350px; overflow-y:auto; border-radius:10px; border:1px solid rgba(255,255,255,0.05); padding:10px;" id="admin-leads-table-container">
+            <!-- Table dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Pane: Manage/Remove Stock Products -->
+        <div class="admin-pane" id="pane-manage-products">
+          <h3 style="margin-bottom:20px; color:var(--accent-gold);">Remove Stock Items</h3>
+          <div style="max-height: 380px; overflow-y:auto; border-radius:10px; border:1px solid rgba(255,255,255,0.05); padding:10px;" id="admin-inventory-table-container">
+            <!-- Table dynamically populated -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: rgba(11, 7, 5, 0.95); padding: 50px 5% 30px 5%; border-top: 1px solid rgba(255, 107, 0, 0.15); margin-top:80px; font-size:0.9rem;">
+    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px; margin-bottom:40px; max-width:1100px; margin-left:auto; margin-right:auto;">
+      <div style="flex: 1.5; min-width: 250px;">
+        <h4 style="color:var(--accent-gold); font-size:1.15rem; margin-bottom:15px;">JAYA JAYA VARAHI TOYS</h4>
+        <p style="color:var(--text-muted); margin-bottom:15px;">Your trusted local partner for families, event host gifts, and kitchenwares since 2018. Rated 4.8/5 on Google Reviews.</p>
+        <span style="font-size:0.8rem; background:rgba(255,107,0,0.1); border:1px solid rgba(255,107,0,0.3); padding:4px 12px; border-radius:12px; color:var(--primary-orange);">Peerzadiguda, Hyderabad</span>
+      </div>
+      <div style="flex:1; min-width: 150px;">
+        <h4 style="color:var(--text-white); margin-bottom:15px;">Product Sections</h4>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#catalog" style="color:var(--text-muted); text-decoration:none;">Toys & Games</a></li>
+          <li><a href="#catalog" style="color:var(--text-muted); text-decoration:none;">Set of 10 Return Gifts</a></li>
+          <li><a href="#catalog" style="color:var(--text-muted); text-decoration:none;">Steel Kitchen Utensils</a></li>
+          <li><a href="#specials" style="color:var(--text-muted); text-decoration:none;">Today's Offer Deals</a></li>
+        </ul>
+      </div>
+      <div style="flex:1; min-width: 150px;">
+        <h4 style="color:var(--text-white); margin-bottom:15px;">Interactive Actions</h4>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#loyalty" style="color:var(--text-muted); text-decoration:none;">Rewards Program</a></li>
+          <li><a href="#" id="footer-admin-login-link" style="color:var(--text-muted); text-decoration:none;">Dashboard Login</a></li>
+          <li><a href="#" id="footer-print-code-link" style="color:var(--text-muted); text-decoration:none;">Print QR Flyer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; text-align: center; color: var(--text-muted);">
+      &copy; 2026 JAYA JAYA VARAHI TOYS, RETURN GIFTS & KITCHEN WARE. All rights reserved. Developed with ❤️ in Hyderabad.
+    </div>
+  </footer>
+
+  <!-- Drawer: Shopping Cart -->
+  <div class="cart-drawer" id="cart-drawer-container">
+    <div class="cart-header">
+      <h3 style="font-family:var(--font-heading);"><i class="fa-solid fa-basket-shopping" style="color:var(--accent-gold)"></i> Shopping Cart</h3>
+      <button class="close-btn" id="cart-drawer-close" style="position:static;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="cart-items" id="cart-drawer-items-list">
+      <!-- Items populated by JS -->
+    </div>
+    
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Cart Total:</span>
+        <span id="cart-total-mrp">₹0</span>
+      </div>
+      <div class="form-group" style="margin-bottom:20px;">
+        <label><i class="fa-regular fa-clock"></i> Schedule Pickup Time</label>
+        <select id="cart-pickup-time" style="width:100%;">
+          <option value="10:30 AM">10:30 AM (Morning)</option>
+          <option value="12:00 PM">12:00 PM (Noon)</option>
+          <option value="02:30 PM">02:30 PM (Afternoon)</option>
+          <option value="05:00 PM">05:00 PM (Evening)</option>
+          <option value="07:30 PM">07:30 PM (Late Evening)</option>
+        </select>
+      </div>
+      <button class="glass-btn gold" id="cart-whatsapp-checkout-btn" style="width:100%; justify-content:center; padding:15px;">
+        <i class="fa-brands fa-whatsapp"></i> Confirm & Send Pre-Order via WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal: Admin Dashboard Login -->
+  <div class="modal-overlay" id="admin-login-modal">
+    <div class="modal-content glass-panel">
+      <button class="close-btn" id="admin-login-close"><i class="fa-solid fa-xmark"></i></button>
+      <h3 style="margin-bottom:25px; text-align:center; font-family:var(--font-heading); color:var(--accent-gold);"><i class="fa-solid fa-lock"></i> Owner Dashboard Login</h3>
+      <form id="admin-login-form">
+        <div class="form-group" style="margin-bottom:20px;">
+          <label>Enter Admin Passcode</label>
+          <input type="password" id="admin-pass-input" placeholder="Enter password (default: admin123)" required>
+          <p id="admin-login-error" style="color:red; font-size:0.8rem; margin-top:5px; display:none;">Incorrect Passcode. Please try again.</p>
+        </div>
+        <button type="submit" class="glass-btn" style="width:100%; justify-content:center;">Access Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Discount Lead popup -->
+  <div class="modal-overlay" id="discount-modal">
+    <div class="modal-content glass-panel" style="text-align:center; border-color:var(--accent-gold);">
+      <button class="close-btn" id="discount-modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div style="font-size:3.5rem; color:var(--accent-gold); margin-bottom:15px;"><i class="fa-solid fa-tags"></i></div>
+      <h3 style="margin-bottom:10px; font-family:var(--font-heading);">GET 10% INSTANT DISCOUNT!</h3>
+      <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:25px;">Enter your name and mobile number to unlock 10% off coupon code for your pre-order!</p>
+      
+      <form id="lead-collect-form" style="display:flex; flex-direction:column; gap:12px;">
+        <input type="text" id="lead-name" placeholder="Your Name" required style="padding:12px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); color:white; outline:none;">
+        <input type="tel" id="lead-phone" placeholder="WhatsApp Phone Number" required style="padding:12px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); color:white; outline:none;">
+        <button type="submit" class="glass-btn gold" style="width:100%; justify-content:center; margin-top:10px;">Get My 10% Off Code</button>
+      </form>
+
+      <div id="coupon-display-container" style="display:none; margin-top:20px; border:2px dashed var(--accent-gold); padding:15px; border-radius:10px; background:rgba(255,215,0,0.05);">
+        <p style="font-size:0.85rem; color:var(--text-muted);">Your Discount Coupon Code:</p>
+        <h2 style="color:var(--accent-gold); letter-spacing:2px; font-family:var(--font-heading); font-size:1.8rem; margin:10px 0;">VARAHI10</h2>
+        <p style="font-size:0.75rem; color:var(--text-muted);">Use this code during checkout or WhatsApp chat pickup!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="./main.js"></script>
+
+</body>
+</html>
