@@ -28,9 +28,9 @@ const defaultSpecialOffer = {
   image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600"
 };
 
-const BUCKET_URL = "https://kvdb.io/JayaJayaVarahiToys_Bucket_2026_Key/products";
-const SPECIAL_URL = "https://kvdb.io/JayaJayaVarahiToys_Bucket_2026_Key/special_offer";
-const SPECIAL_ENABLED_URL = "https://kvdb.io/JayaJayaVarahiToys_Bucket_2026_Key/special_offer_enabled";
+const BUCKET_URL = "https://kvdb.io/T5ybBsLSFgz1s69EMfrKHB/products";
+const SPECIAL_URL = "https://kvdb.io/T5ybBsLSFgz1s69EMfrKHB/special_offer";
+const SPECIAL_ENABLED_URL = "https://kvdb.io/T5ybBsLSFgz1s69EMfrKHB/special_offer_enabled";
 
 // Global App States
 let products = JSON.parse(localStorage.getItem('varahi_products')) || defaultProducts;
@@ -57,6 +57,9 @@ async function syncCloudProducts() {
           }
         }
       }
+    } else if (res.status === 404) {
+      // First time loading - seed the database key with default products
+      await saveProductsToCloud();
     }
   } catch (err) {
     console.warn("Could not sync products from cloud, using offline cache:", err);
@@ -90,6 +93,9 @@ async function syncCloudSpecial() {
           renderSpecialOffer();
         }
       }
+    } else if (res.status === 404) {
+      // Seed default special offer to cloud
+      await saveSpecialToCloud(true);
     }
     const resEnabled = await fetch(SPECIAL_ENABLED_URL);
     if (resEnabled.ok) {
