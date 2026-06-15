@@ -29,6 +29,8 @@ const defaultSpecialOffer = {
 };
 
 const BUCKET_URL = "https://kvdb.io/JayaJayaVarahiToys_Bucket_2026_Key/products";
+const SPECIAL_URL = "https://kvdb.io/JayaJayaVarahiToys_Bucket_2026_Key/special_offer";
+const SPECIAL_ENABLED_URL = "https://kvdb.io/JayaJayaVarahiToys_Bucket_2026_Key/special_offer_enabled";
 
 // Global App States
 let products = JSON.parse(localStorage.getItem('varahi_products')) || defaultProducts;
@@ -43,11 +45,16 @@ async function syncCloudProducts() {
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data) && data.length > 0) {
-        products = data;
-        localStorage.setItem('varahi_products', JSON.stringify(products));
-        renderCatalog('all');
-        if (sessionStorage.getItem('admin_logged_in')) {
-          populateInventoryTable();
+        // Compare with local storage to avoid redrawing if nothing changed
+        const currentLocal = localStorage.getItem('varahi_products');
+        const incomingString = JSON.stringify(data);
+        if (currentLocal !== incomingString) {
+          products = data;
+          localStorage.setItem('varahi_products', incomingString);
+          renderCatalog(document.querySelector('.filter-tab.active')?.getAttribute('data-category') || 'all');
+          if (sessionStorage.getItem('admin_logged_in')) {
+            populateInventoryTable();
+          }
         }
       }
     }
@@ -69,6 +76,57 @@ async function saveProductsToCloud() {
   }
 }
 
+async function syncCloudSpecial() {
+  try {
+    const res = await fetch(SPECIAL_URL);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.title) {
+        const currentLocalSpecial = localStorage.getItem('varahi_special');
+        const incomingString = JSON.stringify(data);
+        if (currentLocalSpecial !== incomingString) {
+          specialOffer = data;
+          localStorage.setItem('varahi_special', incomingString);
+          renderSpecialOffer();
+        }
+      }
+    }
+    const resEnabled = await fetch(SPECIAL_ENABLED_URL);
+    if (resEnabled.ok) {
+      const enabledVal = await resEnabled.json();
+      const currentLocalEnabled = localStorage.getItem('varahi_special_enabled');
+      const incomingString = JSON.stringify(enabledVal);
+      if (currentLocalEnabled !== incomingString) {
+        localStorage.setItem('varahi_special_enabled', incomingString);
+        renderSpecialOffer();
+      }
+    }
+  } catch (err) {
+    console.warn("Could not sync special offer from cloud:", err);
+  }
+}
+
+async function saveSpecialToCloud(isEnabled) {
+  try {
+    localStorage.setItem('varahi_special', JSON.stringify(specialOffer));
+    localStorage.setItem('varahi_special_enabled', JSON.stringify(isEnabled));
+    
+    await fetch(SPECIAL_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(specialOffer)
+    });
+    
+    await fetch(SPECIAL_ENABLED_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(isEnabled)
+    });
+  } catch (err) {
+    console.error("Error saving special offer to cloud DB:", err);
+  }
+}
+
 // Initialize Web Application
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initial Render
@@ -79,6 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Sync Cloud Database (KVdb)
   syncCloudProducts();
+  syncCloudSpecial();
+
+  // Periodically check for remote additions, removals or updates
+  setInterval(() => {
+    syncCloudProducts();
+    syncCloudSpecial();
+  }, 12000);
 
   // Splash Screen Explore Transition
   const exploreBtn = document.getElementById('explore-store-btn');
@@ -674,10 +739,9 @@ function setupAdminDashboard() {
     };
     
     const isEnabled = document.getElementById('admin-special-enabled').checked;
-    localStorage.setItem('varahi_special_enabled', JSON.stringify(isEnabled));
-    localStorage.setItem('varahi_special', JSON.stringify(specialOffer));
+    saveSpecialToCloud(isEnabled);
     renderSpecialOffer();
-    alert("Today's Special Offer has been updated successfully!");
+    alert("Today's Special Offer has been updated successfully on the cloud!");
     confetti({ particleCount: 50 });
   });
 
