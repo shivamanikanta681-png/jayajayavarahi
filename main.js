@@ -38,8 +38,10 @@ let specialOffer = JSON.parse(localStorage.getItem('varahi_special')) || default
 let cart = [];
 let leads = JSON.parse(localStorage.getItem('varahi_leads')) || [];
 let activeUserPhone = null;
+let isSyncingBlocked = false;
 
 async function syncCloudProducts() {
+  if (isSyncingBlocked) return;
   try {
     const res = await fetch(BUCKET_URL);
     if (res.ok) {
@@ -67,19 +69,27 @@ async function syncCloudProducts() {
 }
 
 async function saveProductsToCloud() {
+  isSyncingBlocked = true;
   try {
     localStorage.setItem('varahi_products', JSON.stringify(products));
-    await fetch(BUCKET_URL, {
+    const res = await fetch(BUCKET_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(products)
     });
+    if (!res.ok) {
+      throw new Error(`Server returned status ${res.status}`);
+    }
   } catch (err) {
     console.error("Error saving products to cloud DB:", err);
+    alert("Failed to save changes to the cloud database: " + err.message);
+  } finally {
+    isSyncingBlocked = false;
   }
 }
 
 async function syncCloudSpecial() {
+  if (isSyncingBlocked) return;
   try {
     const res = await fetch(SPECIAL_URL);
     if (res.ok) {
@@ -113,6 +123,7 @@ async function syncCloudSpecial() {
 }
 
 async function saveSpecialToCloud(isEnabled) {
+  isSyncingBlocked = true;
   try {
     localStorage.setItem('varahi_special', JSON.stringify(specialOffer));
     localStorage.setItem('varahi_special_enabled', JSON.stringify(isEnabled));
@@ -130,6 +141,9 @@ async function saveSpecialToCloud(isEnabled) {
     });
   } catch (err) {
     console.error("Error saving special offer to cloud DB:", err);
+    alert("Failed to save special offer changes to the cloud: " + err.message);
+  } finally {
+    isSyncingBlocked = false;
   }
 }
 
@@ -692,33 +706,30 @@ function setupAdminDashboard() {
     
     if (fileInput.files && fileInput.files[0]) {
       const file = fileInput.files[0];
-      const reader = new FileReader();
       
-      reader.onload = function(event) {
-        const imageBase64 = event.target.result;
-        
+      // Compress image to fit inside cloud database payload size limit (max 64KB)
+      compressImage(file, async function(compressedBase64) {
         const newProduct = {
           id: Date.now(),
           name,
           category,
           price,
-          image: imageBase64
+          image: compressedBase64
         };
 
         products.push(newProduct);
-        saveProductsToCloud();
+        await saveProductsToCloud();
         renderCatalog('all');
+        populateInventoryTable();
         
         // Clear Form
         document.getElementById('admin-prod-name').value = '';
         document.getElementById('admin-prod-price').value = '';
         fileInput.value = '';
         
-        alert("New product has been successfully added to catalog with your uploaded image!");
+        alert("New product has been successfully added to catalog with compressed image!");
         confetti({ particleCount: 80, spread: 60 });
-      };
-      
-      reader.readAsDataURL(file);
+      });
     } else {
       alert("Please choose an image file to upload!");
     }
@@ -734,7 +745,7 @@ function setupAdminDashboard() {
   document.getElementById('admin-special-img').value = specialOffer.image;
   document.getElementById('admin-special-enabled').checked = JSON.parse(localStorage.getItem('varahi_special_enabled')) !== false;
 
-  specialForm.addEventListener('submit', (e) => {
+  specialForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     specialOffer = {
       title: document.getElementById('admin-special-title').value,
@@ -745,7 +756,7 @@ function setupAdminDashboard() {
     };
     
     const isEnabled = document.getElementById('admin-special-enabled').checked;
-    saveSpecialToCloud(isEnabled);
+    await saveSpecialToCloud(isEnabled);
     renderSpecialOffer();
     alert("Today's Special Offer has been updated successfully on the cloud!");
     confetti({ particleCount: 50 });
@@ -893,11 +904,11 @@ function populateInventoryTable() {
 
   // Add click handlers to delete buttons
   container.querySelectorAll('.remove-stock-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', async (e) => {
       const id = parseInt(e.currentTarget.getAttribute('data-id'));
       if (confirm("Are you sure you want to remove this item from your stock?")) {
         products = products.filter(p => p.id !== id);
-        saveProductsToCloud();
+        await saveProductsToCloud();
         renderCatalog('all');
         populateInventoryTable();
       }
@@ -934,4 +945,41 @@ function setupPrintFlyer() {
 
   triggerBtn.addEventListener('click', handlePrint);
   footerBtn.addEventListener('click', handlePrint);
+}
+
+// Client-Side Image Compression Helper
+function compressImage(file, callback) {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = (event) => {
+    const img = new Image();
+    img.src = event.target.result;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const max_size = 280; // Limit dimensions to ~280px to keep base64 string extremely small
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > max_size) {
+          height *= max_size / width;
+          width = max_size;
+        }
+      } else {
+        if (height > max_size) {
+          width *= max_size / height;
+          height = max_size;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Export as compressed Jpeg
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.6);
+      callback(dataUrl);
+    };
+  };
 }
