@@ -29,6 +29,8 @@ class MainActivity : ComponentActivity() {
                             domStorageEnabled = true
                             allowFileAccess = true
                             allowContentAccess = true
+                            allowFileAccessFromFileURLs = true
+                            allowUniversalAccessFromFileURLs = true
                             databaseEnabled = true
                             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                         }
