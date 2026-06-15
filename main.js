@@ -28,9 +28,9 @@ const defaultSpecialOffer = {
   image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600"
 };
 
-const BUCKET_URL = "https://kvdb.io/T5ybBsLSFgz1s69EMfrKHB/products";
-const SPECIAL_URL = "https://kvdb.io/T5ybBsLSFgz1s69EMfrKHB/special_offer";
-const SPECIAL_ENABLED_URL = "https://kvdb.io/T5ybBsLSFgz1s69EMfrKHB/special_offer_enabled";
+const BUCKET_URL = "https://kvdb.io/N38Y3cZVbN4y2AMqn2AxWx/products";
+const SPECIAL_URL = "https://kvdb.io/N38Y3cZVbN4y2AMqn2AxWx/special_offer";
+const SPECIAL_ENABLED_URL = "https://kvdb.io/N38Y3cZVbN4y2AMqn2AxWx/special_offer_enabled";
 
 // Global App States
 let products = JSON.parse(localStorage.getItem('varahi_products')) || defaultProducts;
